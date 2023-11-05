@@ -5,12 +5,14 @@ import HeaderCartButton from "./HeaderCartButton";
 const Header=(props)=>{
     return (<Fragment>
         <header className={classes.header}>
-            <h1>ReactMeals</h1>
+            <h1>TasteDelights</h1>
             <HeaderCartButton/>
         </header>
         <div className={classes['main-image']}>
             <img src={mealsImage} alt="food header"/>
-        </div>        
+            
+        </div>    
+           
     </Fragment>
 )}
 

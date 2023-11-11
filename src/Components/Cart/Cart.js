@@ -6,7 +6,7 @@ import CartItem from "./CartItem";
 const Cart=props=>{
   const cartCtx=useContext(CartContext)
 
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(0);  
 
   
   // useEffect(() => {
@@ -41,22 +41,30 @@ const Cart=props=>{
 
 const cartItemRemoveHandler=id=>{
   const itemToRemove = cartCtx.items.find((item) => item.id === id);
+  console.log("ctx.item",cartCtx.items)
+  console.log("itemToRemove",itemToRemove)
   if (itemToRemove) {
     // Decrease the quantity by 1 (if it's greater than 0)
     if (itemToRemove.quantity > 0) {
       itemToRemove.quantity -= 1;
       setTotal((prevTotal) => prevTotal - itemToRemove.amount);
     }
-    
-    
+    // else if(itemToRemove.quantity === 0){
+    //   console.log("ctx.item2",cartCtx.items)
+    //   console.log("itemToRemove2>>",itemToRemove)
+    //   const updatedItem=cartCtx.items.filter((item)=>item.quantity!==0)
+    //   console.log("updated item>>",updatedItem)
+    //   setCartCtxItems(updatedItem)
+    // }    
   }
+  
 }
 
 
 const cartItemAddHandler=id=>{
   const itemToAdd = cartCtx.items.find((item) => item.id === id);
   if (itemToAdd) {
-    // Decrease the quantity by 1 (if it's greater than 0)
+    
     if (itemToAdd) {
       itemToAdd.quantity =Number(itemToAdd.quantity) +1;
       setTotal((prevTotal) => prevTotal + itemToAdd.amount);
@@ -65,9 +73,19 @@ const cartItemAddHandler=id=>{
 }
 
 const cartItems = (
-    <ul className={classes['cart-items']}>      
+    <ul className={classes['cart-items']}>        
       {cartCtx.items.map((item) => (
-        <CartItem key={item.id} name={item.name} amount={item.amount} price={item.price} quantity={item.quantity} onRemove={cartItemRemoveHandler.bind(null,item.id)} onAdd={cartItemAddHandler.bind(null,item.id)}/>
+       item.quantity !== 0 && (
+        <CartItem 
+            key={item.id} 
+            name={item.name} 
+            amount={item.amount} 
+            price={item.price} 
+            quantity={item.quantity} 
+            onRemove={cartItemRemoveHandler.bind(null, item.id)} 
+            onAdd={cartItemAddHandler.bind(null, item.id)}
+        />
+    )
         // <li>Item Name:{item.name} Quantity:{item.quantity}</li>
       ))}
     </ul>

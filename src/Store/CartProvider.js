@@ -4,6 +4,7 @@ import CartContext from "./CartContext"
 
 const CartProvider=props=>{
         const [items,updateItems]=useState([])
+        
 
     // const addItemToCartHandler=item=>{
     //     // use find method
@@ -28,7 +29,7 @@ const CartProvider=props=>{
 
 
     const removeItemFromCartHandler=id=>{
-
+  
     }
 
     const cartContext={        
